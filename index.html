@@ -76,27 +76,20 @@
           detail:'悪い傾向が見られます！ケガにご注意を・・・'
         }],
       }
-      for (let i in fortuneResults){
-        let a = Math.floor(Math.random() * 3 );
-        $('.radius.money').find('.stars').text(fortuneResults['money'][a]['stars'])
-        $('.radius.money').find('.detail').text(fortuneResults['money'][a]['detail'])
-        let b = Math.floor(Math.random() * 3 );
-        $('.radius.work').find('.stars').text(fortuneResults['work'][b]['stars'])
-        $('.radius.work').find('.detail').text(fortuneResults['work'][b]['detail'])
-        let c = Math.floor(Math.random() * 3 );
-        $('.radius.health').find('.stars').text(fortuneResults['health'][c]['stars'])
-        $('.radius.health').find('.detail').text(fortuneResults['health'][c]['detail'])
-      }
-    })
-	    $(".js-fortune-start").click(function() {
-        $('.result').show({}
-        );
-          $('button').toggleClass('js-fortune-start').text('もう一度占う！').toggleClass('js-fortune-restart');
-          $(".js-fortune-restart").click(function() {
-            $('button').text('運勢を占う！')
-              $('.result').hide()
-          });
+	    $(document).on('click',".js-fortune-start",function() {
+        for (let i in fortuneResults){
+          let a = Math.floor(Math.random() * 3 );
+          $('.radius.'+i).find('.stars').text(fortuneResults[i][a]['stars'])
+          $('.radius.'+i).find('.detail').text(fortuneResults[i][a]['detail'])
+        }
+        $('.result').show({});
+        $('button').toggleClass('js-fortune-start').text('もう一度占う！').toggleClass('js-fortune-restart');
       });
+      $(document).on('click',".js-fortune-restart",function() {
+        $('button').toggleClass('js-fortune-start').text('運勢を占う！').toggleClass('js-fortune-restart');
+        $('.result').hide({})
+      });
+    })
     </script>
   </body>
 </html>
